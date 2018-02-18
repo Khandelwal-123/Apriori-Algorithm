@@ -21,4 +21,20 @@ for idx, row in csv_dataframe.iterrows():
             row[i]=k
             k=k+1
         else :
-            row[i] = new_dict[row[i]].values()
+            row[i] = new_dict[row[i]]
+            
+a = csv_dataframe.values    
+a.sort(axis=1)        
+'''
+csv_dataframe.sort_values(by='4', ascending=0)          
+print(csv_dataframe)
+'''
+  
+'''
+csv_dataframe.sort_values(by=list(csv_dataframe.index),axis=1)
+
+
+'''
+#pd.DataFrame(A, csv_dataframe.index, csv_dataframe.columns)
+
+csv_dataframe.to_csv('Output.csv',index_label=False, sep ='\t')
