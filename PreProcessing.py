@@ -6,6 +6,7 @@ Created on Mon Feb 12 12:03:11 2018
 @author: manik
 """
 import pandas as pd
+import csv
 
 csv_dataframe   = pd.read_csv('Preprocess.csv', header = None, sep = '\t',skipinitialspace=True)
 
@@ -18,27 +19,20 @@ for idx, row in csv_dataframe.iterrows():
     
         elif row[i] not in new_dict:
             new_dict[row[i]] = k
+            print(row[i] + ' ' + str(k))
             row[i]=k
             k=k+1
         else :
             row[i] = new_dict[row[i]]
-            
+
+csv_dataframe = csv_dataframe.fillna(20000)
+with open('dict.csv', 'wb') as csv_file:
+    writer = csv.writer(csv_file)
+    for key, value in new_dict.items():
+       writer.writerow([key, value])
+
 a = csv_dataframe.values    
-a.sort(axis=1)        
-'''
-csv_dataframe.sort_values(by='4', ascending=0)          
-print(csv_dataframe)
-'''
-  
-'''
-csv_dataframe.sort_values(by=list(csv_dataframe.index),axis=1)
+a.sort(axis=1)  
+print(csv_dataframe)  
+csv_dataframe.to_csv('Output.csv',header=False, index=False,index_label=False, sep =',')
 
-
-'''
-#pd.DataFrame(A, csv_dataframe.index, csv_dataframe.columns)
-
-csv_dataframe.to_csv('Output.csv',index_label=False, sep ='\t')
-<<<<<<< HEAD
-
-=======
->>>>>>> 650a52b97c53c7cfb92b6f3facefd041f1f1d4aa
